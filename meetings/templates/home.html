@@ -24,9 +24,9 @@
             </div>-->
             <nav>
                 <ul>
-                    <li class="current"><a href="home.html">Home</a></li>
+                    <li class="current"><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="profile.html">Profile</a></li>
-                    <li>Welcome SIMON OKELLO</li>
+                    <li>Welcome {{user.username}}</li>
                     <li><a href="index.html">SignOut</a></li>
                 </ul>
             </nav>
@@ -39,7 +39,7 @@
                 <ul id="questions">
                     {% for meeting in meetings %} 
                     <li>
-                        <h3><a href="">{{meeting.name}}</a> </h3>
+                        <h3><a href="{% url 'detail' meeting.id %}">{{meeting.name}}</a> </h3>
                         <p><a href="">{{meeting.description}}</a> </p>
                         {% endfor %}
                         <!--<p><a href="">What is the venue of this meetup?</a></p><span class="posted_by">by SimonOkello

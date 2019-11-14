@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Asker|User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+    <!--Jquery CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!--Hide and Show reply button-->
+    <!--<script>
+
+    $(document).ready(function () {
+      $(".comment-reply-btn").click(function (event) {
+        event.preventDefault();
+        $(this).parent().next(".comment-replies").fadeToggle();
+      });
+    });
+  </script>-->
+    <!--Hide and Show ends here-->
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight"> Asker</span></h1>
+            </div>
+            <!--<div id="search">
+                <form action="">
+                    <input type="text" placeholder="Search question...">
+                    <button type="submit" class="button">Search</button>
+                </form>
+
+            </div>-->
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li>
+                        Welcome {{request.user.first_name}}
+                    </li>
+                    <!--<li><a href="/profile">Profile</a></li>-->
+                    <li>
+
+                    </li>
+                    {% else %}
+                    <li>
+                        You are not logged in
+                    </li>
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="main">
+        <div class="container">
+            <article id="main-col">
+                <h1>Meeting Questions</h1>
+                <ul id="questions">
+                        <li>
+              
+                          <h2>
+                            <a href="">{{ meeting_detail.name }}</a>
+                          </h2>
+                          <p>{{ meeting_detail.description }}</p>
+                        </li>
+                        <br>
+                </ul>
+                <!-- <li>
+            <h3>Questions:</h3>
+            {% for comment in meetup.comments.all %}
+            <div class="comment-box">
+
+              <p>{{ comment.text}}</p>
+              <p>{{comment.author}}|{{comment.created_date|timesince}} ago| {% if meetup.comments.count > 0 %}
+                {{meetup.comments.count}} Comment{% if meetup.comments.count > 1 %}{% endif %}s|{% endif %}<a
+                  class="comment-reply-btn" href="#">Reply</a></p>
+              <div class="comment-replies" style="display: none;">
+                {% for reply in comment.replies.all %}
+                <blockquote>
+                  <p class="info"><small>{{ reply.author }} | {{ reply.created_on }}</small></p>
+          <li><small>{{ reply.text }}</small></li>
+          </blockquote>
+          {% endfor %}
+          <!--<div class="comment">
+          <form action="" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <!-- Hidden input for parent comment.id 
+            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+            <button type="submit" class="button">Comment</button>
+          </form>
+          <!--</div>-->
+        </div>
+        </div>
+        <!--<div class="arrow-up"></div>
+            <div class="arrow-down"></div>
+
+    <hr>
+    {% empty %}
+    <p>No questions here yet :(</p>
+    {% endfor %}
+
+    </li>-->
+
+        </ul>
+
+        </article>
+        <aside id="sidebar">
+            <h3>Post a Question</h3>
+            <div class="comment">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="post-btn">Ask</button>
+                </form>
+            </div>
+        </aside>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy;2019 Asker. All rights reserved</p>
+    </footer>
+</body>
+
+</html>
